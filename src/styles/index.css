@@ -1,3 +1,9 @@
-/* 
-    General Styles
-*/
+.people-carousel {
+    overflow-x: scroll;
+    margin-bottom: 100px;
+}
+
+.planet-carousel {
+    overflow-x: scroll;
+    /* margin-bottom: 100px; */
+}
