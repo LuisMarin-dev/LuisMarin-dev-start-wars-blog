@@ -1,11 +1,10 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
-
 import { Home } from "./views/home";
 import injectContext from "./store/appContext";
-
 import { Navbar } from "./component/navbar";
+import Detail from "./component/Detail.jsx";
 
 //create your first component
 const Layout = () => {
@@ -21,11 +20,13 @@ const Layout = () => {
 					<Routes>
 						<Route path="/" element={<Home />} />
 						<Route path="*" element={<h1>Not found!</h1>} />
+						<Route path="/:nature/:natureId" element={<Detail />} />
 					</Routes>
 				</ScrollToTop>
 			</BrowserRouter>
 		</div>
 	);
 };
+
 
 export default injectContext(Layout);

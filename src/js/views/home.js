@@ -1,6 +1,6 @@
 import React, {useContext} from "react";
-import rigoImage from "../../img/rigo-baby.jpg";
 import { Context } from "../store/appContext";
+import { Link } from "react-router-dom";
 
 
 export const Home = () => {
@@ -18,8 +18,8 @@ export const Home = () => {
 							<p className="card-text">Gender: {character.properties.gender}</p>
 							<p className="card-text">Hair-color: {character.properties.hair_color}</p>
 							<p className="card-text">Eye-color: {character.properties.eye_color}</p>
-							<a href="#" className="btn btn-outline-primary ">Learn more!</a>
-							<a href="#" className="btn btn-outline-warning "><i class="far fa-heart"></i></a>
+							<Link to ={`/people/${character._id}`} className="btn btn-outline-primary ">Learn more!</Link>
+							<button className="btn btn-outline-warning " onClick={() => actions.addFavorite(character)}><i className="far fa-heart"></i></button>
 						</div>
 						</div>
 					)
@@ -34,8 +34,8 @@ export const Home = () => {
 							<h5 className="card-title">{planet.properties.name}</h5>
 							<p className="card-title">Population: {planet.properties.population}</p>
 							<p className="card-text">Terrain: {planet.properties.terrain}</p>
-							<a href="#" className="btn btn-outline-primary">Learn more!</a>
-							<a href="#" className="btn btn-outline-warning "><i class="far fa-heart"></i></a>
+							<Link to ={`/planet/${planet._id}`} className="btn btn-outline-primary">Learn more!</Link>
+							<button className="btn btn-outline-warning " onClick={() => actions.addFavorite(planet)}><i className="far fa-heart"></i></button>
 						</div>
 						</div>
 					)

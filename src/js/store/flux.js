@@ -4,12 +4,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 			endPoint:["people", "planets"],
 			BASEURL: "https://www.swapi.tech/api",
 			people: JSON.parse(localStorage.getItem("people"))||[],
-			planets: JSON.parse(localStorage.getItem("planets"))||[]
+			planets: JSON.parse(localStorage.getItem("planets"))||[],
+            favorites: []
 		},
 		actions: {
 			getData: () => {
                 let store = getStore()
-                if (store.people.length <= 0) {
+                if (store.people.length <= 0 || store.planets.length <= 0) {
 
                     store.endPoint.forEach(async (endPoint) => {
 
@@ -29,7 +30,19 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
 
             },
-			
+			addFavorite: (favorite) => {
+                let store = getStore();
+                const isFavorite = store.favorites.some(fav=>fav._id == favorite._id)
+                if(isFavorite){
+                    setStore({favorites:store.favorites.filter(fav=>fav._id !== favorite._id)})
+                    console.log("alreadyFavorite")
+                } else{
+                    setStore({favorites:[...store.favorites, favorite]})   
+                    console.log("nuevo faorito")                 
+                }
+
+                console.log(isFavorite)
+            }
 			
 		}
 	};
