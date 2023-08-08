@@ -1,26 +1,33 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import { useParams } from "react-router";
 
-const Detail = () => {
-    const store = useContext(Context);
-    const character = store;
+const DetailPlanets = () => {
+    const {store} = useContext(Context);
+    const {planets} = store;
     const params = useParams();
-    console.log(params)
-// crear un estado para guardar el detalle
-// funcion para hacer le find para buscar el detalle
-// se guarda en el useState
-    return (
+
+const [planet, setPlanet] = useState({});
+
+const getDetail = () => {
+    const detail = planets.find((detail) => detail._id == params.id)
+    setPlanet(detail);
+};
+
+useEffect(()=>{
+    getDetail()
+},[planets]);
+console.log(planets)
+return (
         <>
             <div className="container-fluid details-main-div">
                 <div className="details-container">
-                    <div className="col-5 details-img-container">
-                    <img src={`https://starwars-visualguide.com/assets/img/characters/${character.uid}.jpg`} className="rounded float-start" alt="..." />
-                        <p>Image Here</p>
+                    <div className="details-img-container">
+                        <img src={`https://starwars-visualguide.com/assets/img/planets/${planet.uid}.jpg`} className="rounded float-start" alt="..." />
                     </div>
                     <div className="col-5 details-h1-p-container">
                         <div className="details-text">
-                            <h1>Name Here{character.properties?.name}</h1>
+                            <h1>{planet.properties?.name}</h1>
                             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corporis sed molestiae fugiat cumque quidem ducimus eos labore, dolores aspernatur delectus omnis in asperiores eius explicabo beatae fuga ut obcaecati maxime alias id illo quo aliquam cum mollitia? Dolore, tenetur facere. Doloribus deleniti tempore saepe quaerat laudantium maxime quos nihil omnis laboriosam cum esse, aut fugiat debitis, placeat inventore dolore voluptates hic odio incidunt explicabo molestiae tenetur. Accusantium beatae eaque quidem, ut dicta similique rerum distinctio ab dolorem, numquam, esse qui atque fuga sapiente? Natus, nobis!</p>
                         </div>
                     </div>  
@@ -28,7 +35,7 @@ const Detail = () => {
                 <div className="col-11 details-info-container">
                     <div className="col-2 details-info-bites-container">
                         <p className="details-info-bites-title">Name</p>
-                        <p>{character.properties?.name}</p>
+                        <p>{planet.properties?.name}</p>
                     </div>
                     <div className="col-2 details-info-bites-container">
                         <p className="details-info-bites-title">Birth Year</p>
@@ -56,4 +63,4 @@ const Detail = () => {
     )
 }
 
-export default Detail;
+export default DetailPlanets;
